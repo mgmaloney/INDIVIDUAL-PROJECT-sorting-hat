@@ -50,7 +50,9 @@ const cardOnDom = (cardsArr, divId) => {
   <div class="card-body">
     <h5 class="card-title">${card.name}</h5>
     <p class="card-text">${houseText(card.house)}</p>
-    <button class="btn btn-warning" id="expel--${card.id}">Expel</button>
+    <div class="btn-container">
+      <button class="btn btn-warning" id="expel--${card.id}">Expel</button>
+    </div
   </div>
 </div>
     `;
@@ -58,14 +60,16 @@ const cardOnDom = (cardsArr, divId) => {
     renderToDom(divId, domString);
   } else if (divId === "expelledStudents") {
     cardsArr.forEach((card) => {
-      domString += `<div class="card" style="width: 18rem;">
+      domString += `<div class="card ${card.house}-card" style="width: 18rem;">
   <img src="${voldeImageRandomizer()}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">${card.name}</h5>
     <p class="card-text">${voldeTextRandomizer()}</p>
-    <button class="btn btn-secondary" id="secondchance--${
-      card.id
-    }">Give a Second Chance</button>
+    <div class="btn-container">
+      <button class="btn btn-secondary" id="secondchance--${
+        card.id
+      }">Give a Second Chance</button>
+    </div>
   </div>
 </div>
     `;
