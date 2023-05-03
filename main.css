@@ -1,3 +1,29 @@
 body {
   background-color: aliceblue;
 }
+
+.cards-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin: 3rem;
+}
+
+#currentStudents,
+#expelledStudents {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row wrap;
+}
+
+.card {
+  margin: 1rem;
+  padding: 1.5rem;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
