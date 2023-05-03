@@ -1,11 +1,44 @@
-const students = {};
+const students = [];
 
-const expelledStudents = {};
+const expelledStudents = [];
 
 const renderToDom = (divId, htmlToRender) => {
   let targetedDiv = document.getElementById(divId);
   targetedDiv.innerHTML = htmlToRender;
 };
+
+const filterButtons = () => {
+  let domString = `
+  <button class='filter-button' id="gryffindor-button">Gryffindor</button>
+  <button class='filter-button' id="slytherin-button">Slytherin</button>
+  <button class='filter-button' id="ravenclaw-button">Ravenclaw</button>
+  <button class='filter-button' id="hufflepuff-button">Hufflepuff</button>
+  <button class='filter-button' id="show-all-button">Show All</button>
+  `;
+  renderToDom("filter-buttons", domString);
+};
+
+const formInit = () => {
+  let domString = `
+  <form class="new-student-form">
+    <input
+      type="text"
+      name="nameBox"
+      id="nameBox"
+      placeholder="Please Enter Your Name"
+      />
+    <button type="submit">Sort Me!</button>
+  </form>
+  `;
+  renderToDom("student-form-div", domString);
+};
+
+const startApp = () => {
+  filterButtons();
+  formInit();
+};
+
+startApp();
 
 const cardOnDom = (cardsArr, divId) => {
   let domString = "";
@@ -17,7 +50,7 @@ const cardOnDom = (cardsArr, divId) => {
   <div class="card-body">
     <h5 class="card-title">${card.name}</h5>
     <p class="card-text">${houseText(card.house)}</p>
-    <button class="btn btn-warning expel--${card.id}">Expel</button>
+    <button class="btn btn-warning" id="expel--${card.id}">Expel</button>
   </div>
 </div>
     `;
@@ -30,7 +63,9 @@ const cardOnDom = (cardsArr, divId) => {
   <div class="card-body">
     <h5 class="card-title">${card.name}</h5>
     <p class="card-text">${voldeTextRandomizer()}</p>
-    <button class="btn btn-secondary secondchance--${card.id}">Expel</button>
+    <button class="btn btn-secondary" id="secondchance--${
+      card.id
+    }">Give a Second Chance</button>
   </div>
 </div>
     `;
@@ -104,21 +139,92 @@ const voldeImageRandomizer = () => {
   }
 };
 
-const addNewStudent = () => {
+const form = document.querySelector(".new-student-form");
+
+const addNewStudent = (e) => {
+  e.preventDefault();
   newStudentObj = {
     id: students.length + 1,
-    name: document.getElementById(nameBox).value,
+    name: document.getElementById("nameBox").value,
     house: houseRandomizer(),
   };
   students.push(newStudentObj);
+  cardOnDom(students, "currentStudents");
+  form.reset();
 };
 
+form.addEventListener("submit", addNewStudent);
+
+const targetingApp = document.getElementById("app");
+
 const onExpel = (e) => {
-  if (e.target.id) {
-    const [, id] = e.target.id.split("--");
-    let studentIndex = students.findIndexOf(id);
+  const [, id] = e.target.id.split("--");
+  if (id) {
+    console.log(id);
+    let studentIndex = students.findIndex(
+      (element) => element.id === Number(id)
+    );
+    console.log(studentIndex);
+    console.log(students[studentIndex]);
+    expelledStudents.push(students[studentIndex]);
     students.splice(studentIndex, 1);
+    console.log(expelledStudents);
     cardOnDom(students, "currentStudents");
+
     cardOnDom(expelledStudents, "expelledStudents");
   }
 };
+
+const secondChance = (e) => {
+  const [, id] = e.target.id.split("--");
+  if (id) {
+    console.log(id);
+    let studentIndex = expelledStudents.findIndex(
+      (student) => student.id === Number(id)
+    );
+    console.log(expelledStudents[studentIndex]);
+    students.push(expelledStudents[studentIndex]);
+    expelledStudents.splice(studentIndex, 1);
+    cardOnDom(students, "currentStudents");
+
+    cardOnDom(expelledStudents, "expelledStudents");
+  }
+};
+
+targetingApp.addEventListener("click", (e) => {
+  if (e.target.id.includes("expel")) {
+    onExpel(e);
+  } else if (e.target.id.includes("secondchance")) {
+    secondChance(e);
+  }
+});
+
+const filter = (studentArr, houseString) => {
+  const filteredArr = studentArr.filter(
+    (student) => student.house === houseString
+  );
+  console.log(filteredArr);
+  cardOnDom(filteredArr, "currentStudents");
+};
+
+let gryffindorButton = document.getElementById("gryffindor-button");
+let slytherinButton = document.getElementById("slytherin-button");
+let ravenclawButton = document.getElementById("ravenclaw-button");
+let hufflepuffButton = document.getElementById("hufflepuff-button");
+let showAllButton = document.getElementById("show-all-button");
+
+gryffindorButton.addEventListener("click", () => {
+  filter(students, "gryffindor");
+});
+slytherinButton.addEventListener("click", () => {
+  filter(students, "slytherin");
+});
+ravenclawButton.addEventListener("click", () => {
+  filter(students, "ravenclaw");
+});
+hufflepuffButton.addEventListener("click", () => {
+  filter(students, "hufflepuff");
+});
+showAllButton.addEventListener("click", () => {
+  cardOnDom(students, "currentStudents");
+});
