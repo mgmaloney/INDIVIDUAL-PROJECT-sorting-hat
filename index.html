@@ -14,14 +14,22 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <header>
-      <nav><div id="filter-buttons"></div></nav>
-    </header>
+    <div class="fade-out" id="welcome-message"></div>
     <div id="app">
-      <div id="student-form-div"></div>
+      <div class="page-top">
+        <div id="title"></div>
+        <div id="filter-buttons"></div>
+        <div id="student-form-div"></div>
+      </div>
       <div class="cards-container">
-        <div id="currentStudents"></div>
-        <div id="expelledStudents"></div>
+        <div class="students-container" id="currentStudentsContainer">
+          <div class="students-header" id="currentStudentsHeader"></div>
+          <div id="currentStudents"></div>
+        </div>
+        <div class="students-container" id="expelledStudentsContainer">
+          <div class="students-header" id="expelledStudentsHeader"></div>
+          <div id="expelledStudents"></div>
+        </div>
       </div>
     </div>
     <script
