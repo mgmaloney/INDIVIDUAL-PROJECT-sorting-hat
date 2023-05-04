@@ -1,13 +1,170 @@
+@font-face {
+  font-family: "HP";
+  src: url("fonts/HARRYP__.TTF");
+}
+
+.fade-out {
+  margin-top: 25px;
+  font-size: 21px;
+  text-align: center;
+  animation: fadeout 7s;
+  -moz-animation: fadeout 7s; /* Firefox */
+  -webkit-animation: fadeout 7s; /* Safari and Chrome */
+  -o-animation: fadeout 7s; /* Opera */
+  animation-fill-mode: forwards;
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fadeout {
+  /* Firefox */
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeout {
+  /* Safari and Chrome */
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-o-keyframes fadeout {
+  /* Opera */
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#welcome-message {
+  margin: 5rem;
+  font-size: 20rem;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  border: 10px solid black;
+  border-radius: 3%;
+  background: black;
+}
+
 body {
   background-color: aliceblue;
+  font-family: "HP";
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100%25' width='100%25'%3E%3Cdefs%3E%3Cpattern id='doodad' width='203' height='203' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform='rotate(294)'%3E%3Crect width='100%25' height='100%25' fill='rgba(116, 0, 1,1)'/%3E%3Cpath d='M0 20L19 0L20 20L1 40L0 20zM40 20L59 0L60 20L41 40L40 20z' fill='rgba(174, 0, 1,1)'/%3E%3Cpath d='M20 20L30 0L40 20L30 40L20 20z' fill='rgba(236, 201, 75,1)'/%3E%3Cpath d='M20 20h12L30 40zM40 20h-15L30 0z' fill='rgba(174, 0, 1,1)'/%3E%3Cpath d='M0 20h12L1 40L0 20zM20 20h-15L19 0zM40 20h12L41 40L40 20zM60 20h-15L59 0z ' fill='rgba(236, 201, 75,1)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23doodad)' opacity='80%' height='200%25' width='200%25'/%3E%3C/svg%3E ");
+}
+
+#welcome-message::backdrop {
+  background: black;
+}
+
+#welcome-message h1 {
+  color: white;
+  font-size: 7rem;
+  text-align: center;
+  -webkit-text-stroke: 3px black;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+.page-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+  width: 100%;
+}
+
+#title,
+#filter-buttons,
+#student-form-div {
+  margin: 0.5rem;
+}
+
+#title h1 {
+  font-size: 7rem;
+  color: white;
+  -webkit-text-stroke: 3px black;
+}
+
+h2 {
+  font-size: 5rem;
+  color: white;
+  -webkit-text-stroke: 3px black;
+}
+
+#filter-buttons,
+#student-form-div {
+  font-size: 2rem;
+}
+
+.filter-button,
+.sort-button {
+  background-color: #eeba30;
+  border: solid black 3px;
+  border-radius: 7%;
+  padding: 0rem 1.5rem;
+  margin: 1rem;
+}
+
+.filter-button:hover,
+.sort-button:hover {
+  width: 20rem;
+  height: 5rem;
 }
 
 .cards-container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
+  justify-content: center;
+  max-width: 90%;
   margin: 3rem;
+  flex-flow: wrap row;
+}
+
+.gryffindor-card {
+  background-color: #eeba30;
+}
+
+.slytherin-card {
+  background-color: rgb(70 194 112);
+}
+
+.ravenclaw-card {
+  background-color: #5872c7;
+}
+
+.hufflepuff-card {
+  background-color: #726255;
+}
+
+.card-title {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.card-body-secondchance * {
+  margin: 0.5rem;
 }
 
 #currentStudents,
@@ -15,7 +172,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-direction: row wrap;
+  flex-flow: row wrap;
 }
 
 .card {
@@ -26,4 +183,29 @@ body {
 .btn-container {
   display: flex;
   justify-content: center;
+}
+
+.students-header {
+  display: flex;
+  justify-content: center;
+}
+
+.students-container {
+  margin: 4rem;
+}
+
+.card {
+  height: 35rem;
+}
+
+.card-text {
+  font-size: larger;
+}
+
+.slytherin-img {
+  height: 24rem;
+}
+
+.btn-secondchance {
+  margin-top: 5rem;
 }
