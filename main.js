@@ -14,9 +14,26 @@ const welcomeMessage = () => {
   renderToDom(welcomeDiv, message);
 };
 
+const removeWelcome = () => {
+  let welcome = document.getElementById("welcome-message");
+  setTimeout(() => {
+    welcome.remove();
+  }, 5000);
+};
+
 const headings = () => {
   let title = `<h1>The Sorting Hat</h1>`;
-  let currentStudentsHeader = `<h2>Current Students</h2>`;
+  let currentStudentsHeader = `
+    <h2>Current Students</h2>
+    <div class="sortby">
+      <select name="sortby" id="sortby">
+        <option value="placeholdersort">Sort By:</option>
+        <option value="nameAZ">Name A to Z</option>
+        <option value="nameZA">Name Z to A</option>
+        <option value="houseAZ">House A to Z</option>
+        <option value="houseZA">House Z to A</option>
+      </select>
+    </div>`;
   let expelledStudentsHeader = `<h2>Voldemort's Army</h2>`;
   let titleDiv = "title";
   let currentStudentsDiv = "currentStudentsHeader";
@@ -33,6 +50,7 @@ const filterButtons = () => {
   <button class='filter-button' id="ravenclaw-button">Ravenclaw</button>
   <button class='filter-button' id="hufflepuff-button">Hufflepuff</button>
   <button class='filter-button' id="show-all-button">Show All</button>
+
   `;
   renderToDom("filter-buttons", domString);
 };
@@ -250,10 +268,110 @@ const eventListeners = () => {
   showAllButton.addEventListener("click", () => {
     cardOnDom(students, "currentStudents");
   });
+
+  //sortby
+  const sortNameAlphaAZ = () => {
+    const nameSortArr = students;
+    nameSortArr.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    cardOnDom(nameSortArr, "currentStudents");
+  };
+
+  const sortNameAlphaZA = () => {
+    const nameSortArr = students;
+    nameSortArr.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA > nameB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return 1;
+      }
+      return 0;
+    });
+
+    cardOnDom(nameSortArr, "currentStudents");
+  };
+
+  const sortHouseAlphaAZ = () => {
+    const houseSortArr = students;
+    houseSortArr.sort((a, b) => {
+      const houseA = a.house.toUpperCase();
+      const houseB = b.house.toUpperCase();
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (houseA > houseB) {
+        return 1;
+      }
+      if (houseA < houseB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    cardOnDom(houseSortArr, "currentStudents");
+  };
+
+  const sortHouseAlphaZA = () => {
+    const houseSortArr = students;
+    houseSortArr.sort((a, b) => {
+      const houseA = a.house.toUpperCase();
+      const houseB = b.house.toUpperCase();
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (houseA < houseB) {
+        return 1;
+      }
+      if (houseA > houseB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    cardOnDom(houseSortArr, "currentStudents");
+  };
+
+  let sort = document.getElementById("sortby");
+  sort.addEventListener("change", (e) => {
+    if (e.target.value === "nameAZ") {
+      sortNameAlphaAZ();
+    } else if (e.target.value === "nameZA") {
+      sortNameAlphaZA();
+    } else if (e.target.value === "houseAZ") {
+      sortHouseAlphaAZ();
+    } else if (e.target.value === "houseZA") {
+      sortHouseAlphaZA();
+    }
+  });
 };
 
 const startApp = () => {
   welcomeMessage();
+  removeWelcome();
   filterButtons();
   formInit();
   headings();

@@ -7,10 +7,10 @@
   margin-top: 25px;
   font-size: 21px;
   text-align: center;
-  animation: fadeout 7s;
-  -moz-animation: fadeout 7s; /* Firefox */
-  -webkit-animation: fadeout 7s; /* Safari and Chrome */
-  -o-animation: fadeout 7s; /* Opera */
+  animation: fadeout 5s;
+  -moz-animation: fadeout 5s; /* Firefox */
+  -webkit-animation: fadeout 5s; /* Safari and Chrome */
+  -o-animation: fadeout 5s; /* Opera */
   animation-fill-mode: forwards;
 }
 @keyframes fadeout {
