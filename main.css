@@ -13,6 +13,7 @@
   -o-animation: fadeout 5s; /* Opera */
   animation-fill-mode: forwards;
 }
+
 @keyframes fadeout {
   from {
     opacity: 1;
@@ -208,4 +209,17 @@ h2 {
 
 .btn-secondchance {
   margin-top: 5rem;
+}
+
+.sortby {
+  display: flex;
+  align-items: center;
+}
+
+#sortby {
+  margin: 0rem 2rem;
+  padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+  font-size: xx-large;
+  background-color: #eeba30;
+  border: solid black 3px;
 }
