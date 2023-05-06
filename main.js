@@ -18,7 +18,7 @@ const removeWelcome = () => {
   let welcome = document.getElementById("welcome-message");
   setTimeout(() => {
     welcome.remove();
-  }, 5000);
+  }, 7000);
 };
 
 const headings = () => {
